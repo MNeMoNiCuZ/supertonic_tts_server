@@ -1,4 +1,4 @@
-# My Supertonic TTS Server
+# Supertonic Text-To-Speech Server
 
 This is a server for the Supertonic TTS server, suitable for use with Docker.
 
