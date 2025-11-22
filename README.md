@@ -1,6 +1,7 @@
 # Supertonic Text-To-Speech Server
 
 This is a server for the Supertonic TTS server, suitable for use with Docker.
+Use the [supertonic_tts_client](https://github.com/MNeMoNiCuZ/supertonic_tts_client) for inference code and utilizing this server.
 
 ## Prerequisites
 
