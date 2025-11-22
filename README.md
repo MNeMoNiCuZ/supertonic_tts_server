@@ -12,31 +12,71 @@ git clone https://huggingface.co/Supertone/supertonic assets
 
 ## Running with Docker Compose
 
-Use the following `docker-compose.yml` to run the server:
+To run the Supertonic TTS server using Docker Compose, follow these steps:
 
-```yaml
-version: '3.8'
+1.  **Ensure Docker is installed:** Make sure you have Docker and Docker Compose installed on your system. You can find installation instructions for your operating system on the official Docker website.
 
-services:
-  supertonic_tts_server:
-    build:
-      context: ./supertonic_tts_server
-      dockerfile: Dockerfile
-    image: supertonic_tts_server:latest
-    container_name: supertonic_tts_server
-    ports:
-      - "8765:8765"
+2.  **Use the provided `docker-compose.yml`:** A `docker-compose.yml` file is provided in the root directory of this project. This file is pre-configured to build and run the TTS server.
+
+3.  **Run with Docker Compose:** Navigate to the root directory of the project in your terminal and run the following command to start the server in detached mode (it will run in the background):
+
+    ```bash
+    docker-compose up -d
+    ```
+
+    - **What this does:** This command builds the Docker image from the `Dockerfile` (if it's not already built), and then creates and starts a container named `supertonic_tts_server`.
+    - **First time run:** The initial build process may take a few minutes as it downloads the base Python image and installs the required dependencies.
+
+4.  **Verify the service:** You can check the status of the running container with:
+
+    ```bash
+    docker-compose ps
+    ```
+
+    This will show you the running services defined in your `docker-compose.yml` file. You should see `supertonic_tts_server` listed with a status of `Up`.
+
+    The server should now be accessible at `http://localhost:8765`. You can open this URL in your browser and should see a "Supertonic TTS server is running!" message.
+
+5.  **View Logs:** To see the logs from the running container, which is useful for debugging, use the following command:
+
+    ```bash
+    docker-compose logs -f
+    ```
+    The `-f` flag "follows" the log output, so you'll see new log messages as they are generated.
+
+6.  **Stop the service:** To stop the server, run:
+
+    ```bash
+    docker-compose down
+    ```
+    This command stops and removes the container and the network created by `docker-compose up`.
+
+### Configuration and Tweaks
+
+The `docker-compose.yml` file offers several options for customization:
+
+-   **Changing the Port:** If the default port `8765` is already in use on your system, you can change it. In the `ports` section of the `docker-compose.yml` file, modify the first number. For example, to use port `8888`:
+    ```yaml
+      ports:
+        - "8888:8765"
+    ```
+    The server would then be accessible at `http://localhost:8888`.
+
+-   **Log Level:** You can adjust the verbosity of the server logs by changing the `LOG_LEVEL` environment variable. The available options are `debug`, `info`, `warning`, `error`, and `critical`. For more detailed output for debugging, you could set it to `debug`:
+    ```yaml
     environment:
       - PYTHONUNBUFFERED=1
-      - LOG_LEVEL=info
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8765/health')"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-```
+      - LOG_LEVEL=debug
+    ```
+
+-   **Restart Policy:** The `restart: unless-stopped` policy will automatically restart the container if it crashes, unless you have explicitly stopped it (e.g., with `docker-compose down`). You can change this to `always` to have it restart even if you stop it manually, or remove the line if you don't want it to restart automatically.
+
+-   **Building a new image:** If you make changes to the `Dockerfile` or the application code, you can force Docker Compose to rebuild the image by adding the `--build` flag to the `up` command:
+    ```bash
+    docker-compose up -d --build
+    ```
+
+
 
 ---
 
