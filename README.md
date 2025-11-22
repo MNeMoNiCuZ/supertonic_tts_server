@@ -9,7 +9,7 @@ First, clone the assets from Hugging Face inside this repo:
 ```bash
 git clone https://huggingface.co/Supertone/supertonic assets
 ```
-It should place it in an /assets folder and look like this:
+Make sure it's cloned into a folder named `assets` inside the root of this repository.
 
 <img width="279" height="482" alt="image" src="https://github.com/user-attachments/assets/e43ad0a0-09b6-421d-acbb-06b973859fe7" />
 
