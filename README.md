@@ -1,14 +1,20 @@
-# My Supertonic TTS Server
+# Supertonic Text-To-Speech Server
 
-This is a custom setup for the Supertonic TTS server.
+This is a server for the Supertonic TTS server, suitable for use with Docker.
+
+Use the [https://github.com/MNeMoNiCuZ/supertonic_tts_client](https://github.com/MNeMoNiCuZ/supertonic_tts_client) for inference code and utilizing this server.
 
 ## Prerequisites
 
-First, clone the assets from Hugging Face:
+First, clone the assets from Hugging Face inside this repo:
 
 ```bash
 git clone https://huggingface.co/Supertone/supertonic assets
 ```
+Make sure it's cloned into a folder named `assets` inside the root of this repository.
+
+<img width="279" height="482" alt="image" src="https://github.com/user-attachments/assets/e43ad0a0-09b6-421d-acbb-06b973859fe7" />
+
 
 ## Running with Docker Compose
 
@@ -79,6 +85,8 @@ The `docker-compose.yml` file offers several options for customization:
 
 
 ---
+Original repo:
+https://github.com/supertone-inc/supertonic
 
 ***Everything below is the original documentation from the Supertonic repository.***
 
